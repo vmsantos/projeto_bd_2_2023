@@ -44,5 +44,5 @@ Link de exemplo: https://apex.oracle.com/pls/apex/r/trabalho_bd_2_2023/sistema-d
 login: teste2  
 senha: 123  
 ou  
-login: teste (usuário teste adm)  
+login: teste (adm)  
 senha: 123  
