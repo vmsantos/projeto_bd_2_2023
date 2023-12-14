@@ -12,7 +12,7 @@ cada um. &#x2611;
 2. Catalogação:  
 ◦ O sistema deve permitir a catalogação de informações detalhadas sobre cada
 item, incluindo título, autor, ISBN (para livros), descrição, categoria, número de
-série (para materiais), data de aquisição e estado de conservação. &#x2611;  
+série (para materiais), data de aquisição e estado de conservação.&#x2611;  
 3. Armazenamento Físico:  
 ◦ O sistema deve registrar a localização física de cada livro e material, ou seja, em
 qual estante ou prateleira eles estão armazenados. &#x2611;  
