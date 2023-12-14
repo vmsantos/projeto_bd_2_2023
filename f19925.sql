@@ -33,7 +33,6 @@ prompt APPLICATION 19925 - Sistema de Gerenciamento de Materiais
 -- Application Export:
 --   Application:     19925
 --   Name:            Sistema de Gerenciamento de Materiais
---   Date and Time:   07:52 Thursday December 14, 2023
 --   Exported By:     VINICIUSMELO@BSD.COM.BR
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -43,7 +42,7 @@ prompt APPLICATION 19925 - Sistema de Gerenciamento de Materiais
 --       Processes:               22
 --       Regions:                 26
 --       Buttons:                 25
---       Dynamic Actions:         17
+--       Dynamic Actions:         18
 --     Shared Components:
 --       Logic:
 --         Items:                  2
@@ -119,8 +118,8 @@ wwv_imp_workspace.create_flow(
 ,p_auto_time_zone=>'N'
 ,p_substitution_string_01=>'APP_NAME'
 ,p_substitution_value_01=>'Sistema de Gerenciamento de Materiais'
-,p_last_updated_by=>'TESTE'
-,p_last_upd_yyyymmddhh24miss=>'20231214071108'
+,p_last_updated_by=>'VINICIUSMELO@BSD.COM.BR'
+,p_last_upd_yyyymmddhh24miss=>'20231214081843'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>6
 ,p_print_server_type=>'INSTANCE'
@@ -21118,7 +21117,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'02'
 ,p_last_updated_by=>'VINICIUSMELO@BSD.COM.BR'
-,p_last_upd_yyyymmddhh24miss=>'20231214035459'
+,p_last_upd_yyyymmddhh24miss=>'20231214081843'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(11563597151732566070)
@@ -21153,8 +21152,9 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_action=>'DEFINED_BY_DA'
 ,p_button_template_options=>'#DEFAULT#'
 ,p_button_template_id=>wwv_flow_imp.id(11509274054341673554)
-,p_button_image_alt=>'Cancel'
+,p_button_image_alt=>'Cancelar'
 ,p_button_position=>'CLOSE'
+,p_warn_on_unsaved_changes=>null
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(11565405084793566077)
@@ -21164,7 +21164,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_action=>'SUBMIT'
 ,p_button_template_options=>'#DEFAULT#'
 ,p_button_template_id=>wwv_flow_imp.id(11509274054341673554)
-,p_button_image_alt=>'Delete'
+,p_button_image_alt=>'Excluir'
 ,p_button_position=>'DELETE'
 ,p_button_execute_validations=>'N'
 ,p_confirm_message=>'&APP_TEXT$DELETE_MSG!RAW.'
@@ -21182,7 +21182,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_template_options=>'#DEFAULT#'
 ,p_button_template_id=>wwv_flow_imp.id(11509274054341673554)
 ,p_button_is_hot=>'Y'
-,p_button_image_alt=>'Apply Changes'
+,p_button_image_alt=>'Salvar'
 ,p_button_position=>'NEXT'
 ,p_button_condition=>'P20_ID'
 ,p_button_condition_type=>'ITEM_IS_NOT_NULL'
@@ -21197,7 +21197,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_template_options=>'#DEFAULT#'
 ,p_button_template_id=>wwv_flow_imp.id(11509274054341673554)
 ,p_button_is_hot=>'Y'
-,p_button_image_alt=>'Create'
+,p_button_image_alt=>unistr('Cadastrar empr\00E9stimo')
 ,p_button_position=>'NEXT'
 ,p_button_condition=>'P20_ID'
 ,p_button_condition_type=>'ITEM_IS_NULL'
@@ -21454,7 +21454,7 @@ wwv_flow_imp_page.create_page_da_action(
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(25197932047080974421)
-,p_name=>'acoes id is null'
+,p_name=>'id is null'
 ,p_event_sequence=>40
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'ready'
@@ -21501,7 +21501,7 @@ wwv_flow_imp_page.create_page_da_action(
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(25197933287402974433)
-,p_name=>'acoes id is not null'
+,p_name=>'id is not null'
 ,p_event_sequence=>50
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'ready'
@@ -21544,6 +21544,38 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_action=>'NATIVE_DISABLE'
 ,p_affected_elements_type=>'ITEM'
 ,p_affected_elements=>'P20_IDUSUARIO,P20_DATADEEMPRESTIMO,P20_IDLIVRO,P20_IDMATERIAIS,P20_SELECIONA_TIPO'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(35168755675096654348)
+,p_name=>'id not null e status devolvido'
+,p_event_sequence=>60
+,p_bind_type=>'bind'
+,p_bind_event_type=>'ready'
+,p_display_when_type=>'EXPRESSION'
+,p_display_when_cond=>':P20_ID is not null and :P20_STATUS like ''Devolvido'''
+,p_display_when_cond2=>'PLSQL'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(35168755846642654350)
+,p_event_id=>wwv_flow_imp.id(35168755675096654348)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'Y'
+,p_name=>'desabilita itens'
+,p_action=>'NATIVE_DISABLE'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P20_DATADEDEVOLUCAOPREVISTA,P20_STATUS'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(35303403900907756401)
+,p_event_id=>wwv_flow_imp.id(35168755675096654348)
+,p_event_result=>'TRUE'
+,p_action_sequence=>30
+,p_execute_on_page_init=>'Y'
+,p_name=>'desabilita itens'
+,p_action=>'NATIVE_DISABLE'
+,p_affected_elements_type=>'BUTTON'
+,p_affected_button_id=>wwv_flow_imp.id(11565405464712566078)
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(11565406630265566078)
