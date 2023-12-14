@@ -33,6 +33,7 @@ prompt APPLICATION 19925 - Sistema de Gerenciamento de Materiais
 -- Application Export:
 --   Application:     19925
 --   Name:            Sistema de Gerenciamento de Materiais
+--   Date and Time:   11:44 Thursday December 14, 2023
 --   Exported By:     VINICIUSMELO@BSD.COM.BR
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -119,7 +120,7 @@ wwv_imp_workspace.create_flow(
 ,p_substitution_string_01=>'APP_NAME'
 ,p_substitution_value_01=>'Sistema de Gerenciamento de Materiais'
 ,p_last_updated_by=>'VINICIUSMELO@BSD.COM.BR'
-,p_last_upd_yyyymmddhh24miss=>'20231214081843'
+,p_last_upd_yyyymmddhh24miss=>'20231214114249'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>6
 ,p_print_server_type=>'INSTANCE'
@@ -21117,7 +21118,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'02'
 ,p_last_updated_by=>'VINICIUSMELO@BSD.COM.BR'
-,p_last_upd_yyyymmddhh24miss=>'20231214081843'
+,p_last_upd_yyyymmddhh24miss=>'20231214114249'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(11563597151732566070)
@@ -21344,7 +21345,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_source=>'STATUS'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_RADIOGROUP'
-,p_lov=>'STATIC:Emprestado;Emprestado,Devolvido;Devolvido'
+,p_lov=>'STATIC:Emprestado;Emprestado,Devolvido;Devolvido,Pendente;Pendente'
 ,p_tag_css_classes=>'statusradio'
 ,p_field_template=>wwv_flow_imp.id(11509271415624673553)
 ,p_item_template_options=>'#DEFAULT#'
@@ -21536,14 +21537,44 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_wait_for_result=>'Y'
 );
 wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(25197933939658974440)
+ p_id=>wwv_flow_imp.id(35303404081796756402)
 ,p_event_id=>wwv_flow_imp.id(25197933287402974433)
 ,p_event_result=>'TRUE'
 ,p_action_sequence=>20
 ,p_execute_on_page_init=>'Y'
+,p_name=>'somente exibicao'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'//$('':radio:not(:checked)'').attr(''disabled'', true);',
+'$(''#P20_SELECIONA_TIPO_0:not(:checked)'').attr(''disabled'', true);'))
+,p_client_condition_type=>'EQUALS'
+,p_client_condition_element=>'P20_SELECIONA_TIPO'
+,p_client_condition_expression=>'Material'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(35303404144812756403)
+,p_event_id=>wwv_flow_imp.id(25197933287402974433)
+,p_event_result=>'TRUE'
+,p_action_sequence=>30
+,p_execute_on_page_init=>'Y'
+,p_name=>'somente exibicao material'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'//$('':radio:not(:checked)'').attr(''disabled'', true);',
+'$(''#P20_SELECIONA_TIPO_1:not(:checked)'').attr(''disabled'', true);'))
+,p_client_condition_type=>'EQUALS'
+,p_client_condition_element=>'P20_SELECIONA_TIPO'
+,p_client_condition_expression=>'Livro'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(25197933939658974440)
+,p_event_id=>wwv_flow_imp.id(25197933287402974433)
+,p_event_result=>'TRUE'
+,p_action_sequence=>40
+,p_execute_on_page_init=>'Y'
 ,p_action=>'NATIVE_DISABLE'
 ,p_affected_elements_type=>'ITEM'
-,p_affected_elements=>'P20_IDUSUARIO,P20_DATADEEMPRESTIMO,P20_IDLIVRO,P20_IDMATERIAIS,P20_SELECIONA_TIPO'
+,p_affected_elements=>'P20_IDUSUARIO,P20_DATADEEMPRESTIMO,P20_IDLIVRO,P20_IDMATERIAIS'
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(35168755675096654348)
@@ -21564,7 +21595,7 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_name=>'desabilita itens'
 ,p_action=>'NATIVE_DISABLE'
 ,p_affected_elements_type=>'ITEM'
-,p_affected_elements=>'P20_DATADEDEVOLUCAOPREVISTA,P20_STATUS'
+,p_affected_elements=>'P20_DATADEDEVOLUCAOPREVISTA,P20_STATUS,P20_SELECIONA_TIPO'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(35303403900907756401)
