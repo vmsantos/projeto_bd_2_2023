@@ -31,3 +31,18 @@ materiais por título, autor, categoria, etc. &#x2611;
 usuários autorizados (administradores e chefes do laboratório) possam
 cadastrar, modificar e excluir registros. &#x2611;  
 
+## Preparando o ambiente
+### Usando apex.oracle.com
+1. Solicitar um workspace em https://apex.oracle.com/pls/apex/r/apex/quick-sign-up/request-workspace, basta seguir as instruções do site.
+
+### Instalando a aplicação
+1. Logado no Oracle APEX, primeiro clique em SQL Workshop -> SQL Scripts, carregue e execute os scripts de DDL e posteriomente carregue os dados nas tabelas.
+2. Agora basta clicar em App builder -> Import e seguir as instruções para importar a aplicação (arquivo f19925.sql).
+3. Execute a aplicação.
+
+Link de exemplo: https://apex.oracle.com/pls/apex/r/trabalho_bd_2_2023/sistema-de-gerenciamento-de-materiais  
+login: teste2  
+senha: 123  
+ou  
+login: teste  (usuário teste adm)
+senha: 123  
